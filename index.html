@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#523bff">
+  <link rel="image_src" href="https://host.ranjankashyap1.repl.co/uploads/HuAOPpm5a.png">
+  <link rel="stylesheet" href="style.css" />
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="bar.css" />
+  <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/gz2MzTV/Ranjan.png"">
+  <link rel=" manifest" href="manifest.json">
+  <title>QRCode</title>
+</head>
+
+<body>
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/9967/9967512.png" alt="" />
+    <h3>
+      <qr>QR</qr> code
+    </h3>
+  </header>
+  <div class="loading">
+    <div class="bar"></div>
+  </div>
+  <main>
+    <section class="sec1">
+      <div class="text">
+        <input autocomplete="off" required id="input_text" type="text" />
+        <label for="input_text">Enter <span id="typing">Text</span></label>
+      </div>
+
+      <nav>
+        <ul id="scroll">
+          <li class="active" data-tabs="#home">
+            <i class="material-icons">home</i>Home
+          </li>
+          <li data-tabs="#dots"><i class="material-icons">grain</i>Dots</li>
+
+          <li data-tabs="#corner-square">
+            <i class="material-icons">widgets</i>Corner Square
+          </li>
+          <li data-tabs="#corner-dot">
+            <i class="material-icons">pin_invoke</i>Corner Dot
+          </li>
+          <li data-tabs="#background">
+            <i class="material-icons">layers</i>Background
+          </li>
+          <li data-tabs="#image"><i class="material-icons">image</i>Image</li>
+
+          <li data-tabs="#style">
+            <i class="material-icons">style</i>Styles
+          </li>
+          <li data-tabs="#download">
+            <i class="material-icons">download</i>download
+          </li>
+        </ul>
+    <div class="arrow left">
+      
+        <i onclick="prev()" id="left" class="material-icons">keyboard_arrow_left</i>
+    </div>
+        <div class="arrow right">
+          
+        <i onclick="next()" id="right" class="material-icons">keyboard_arrow_right</i>
+        </div>
+      </nav>
+
+      <div class="tabs-content">
+        <div class="active" data-content id="home">
+          <div class="controls">
+            <div class="row1">
+              <label>Height</label>
+            </div>
+            <div class="row2">
+              <input oninput="Height(this)" value="200" type="number" />
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Width</label>
+            </div>
+            <div class="row2">
+              <input oninput="Width(this)" value="200" type="number" />
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Margin</label>
+            </div>
+            <div class="row2">
+              <input oninput="Margin(this)" value="10" type="number" />
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label for="">Error Correction</label>
+            </div>
+            <div class="row2">
+              <select onchange="ErrorCorrection(this)">
+                <option value="H">H</option>
+                <option value="M">M</option>
+                <option value="Q">Q</option>
+                <option value="L">L</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls">
+            <div style="margin-top: 10px" class="row2">
+              <label>
+                <button onclick="download()">
+                  <i id="dwn2" class="material-icons">download</i> Download
+                </button>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div data-content id="dots">
+          <div class="controls">
+            <div class="row1">
+              <label>Dot style</label>
+            </div>
+            <div class="row2">
+              <select id="dotsid" onchange="updateDotsOption(this)">
+                <option value="square">Square</option>
+                <option value="dots">Dots</option>
+                <option value="rounded">Rounded</option>
+                <option value="extra-rounded">Extra-Roudned</option>
+                <option value="classy">Classy</option>
+                <option value="classy-rounded">Classy Rounded</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label for="">Color type</label>
+            </div>
+            <div class="row2">
+              <select id="select-gradient">
+                <option value="1">Singal</option>
+                <option value="2">Gradient</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls hide">
+            <div class="row1">
+              <label>Gradient type</label>
+            </div>
+            <div class="row2">
+              <select onchange="updateDotsGradienttype(this)" class="hie">
+                <option value="linear">linear</option>
+                <option value="radial">Radial</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="controls hide">
+            <div class="row1">
+              <label>Colors</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input id="col1" oninput="updateDotsGradientColor1(this)" type="color" />
+                <input id="col2" oninput="updateDotsGradientColor2(this)" type="color" />
+              </div>
+            </div>
+          </div>
+
+          <div id="hideColor" class="controls">
+            <div class="row1">
+              <label>Color</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input oninput="updateDotsOptionColor(this)" id="colorhide" type="color" />
+              </div>
+            </div>
+          </div>
+          <div class="controls hide">
+            <div class="row1">
+              <label>Roation</label>
+            </div>
+            <div class="row2">
+              <input oninput="updateDotsRotation(this)" type="number" />
+            </div>
+          </div>
+        </div>
+        <div data-content id="corner-square">
+          <div class="controls">
+            <div class="row1">
+              <label>Square style</label>
+            </div>
+            <div class="row2">
+              <select onchange="updateConrnerSquareType(this)">
+                <option value="square">Square</option>
+                <option value="dot">dot</option>
+                <option value="extra-rounded">extra-rounded</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Color type</label>
+            </div>
+            <div class="row2">
+              <select id="select-gradient">
+                <option value="1">Singal</option>
+                <option value="2">Gradient</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls hide">
+            <div class="row1">
+              <label>Gradient type</label>
+            </div>
+            <div class="row2">
+              <select onchange="updateConrnerSquareGtype(this)">
+                <option value="linear">linear</option>
+                <option value="radial">Radial</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls hide">
+            <div class="row1">
+              <label>Colors</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input oninput="updateConrnerSquareGColor1(this)" type="color" />
+                <input oninput="updateConrnerSquareGColor2(this)" type="color" />
+              </div>
+            </div>
+          </div>
+          <div id="hideColor" class="controls">
+            <div class="row1">
+              <label>Color</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input oninput="updateConrnerSquareColor(this)" type="color" />
+              </div>
+            </div>
+          </div>
+          <div class="controls hide">
+            <div class="row1">
+              <label>Roation</label>
+            </div>
+            <div class="row2">
+              <input oninput="updateConrnerSquareGRoation(this)" type="number" />
+            </div>
+          </div>
+        </div>
+        <div data-content id="corner-dot">
+          <div class="controls">
+            <div class="row1">
+              <label>Dot style</label>
+            </div>
+            <div class="row2">
+              <select onchange="updatedot(this)">
+                <option value="square">Square</option>
+                <option value="dot">dot</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Color type</label>
+            </div>
+            <div class="row2">
+              <select id="select-gradient">
+                <option value="1">Singal</option>
+                <option value="2">Gradient</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls hide">
+            <div class="row1">
+              <label>Gradient type</label>
+            </div>
+            <div class="row2">
+              <select onchange="updatecornerdotsGtype(this)">
+                <option value="linear">linear</option>
+                <option value="radial">Radial</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls hide">
+            <div class="row1">
+              <label>Colors</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input oninput="updatecornerdotsColor1(this)" type="color" />
+                <input oninput="updatecornerdotsColor2(this)" type="color" />
+              </div>
+            </div>
+          </div>
+          <div id="hideColor" class="controls">
+            <div class="row1">
+              <label>Color</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input oninput="updateDotColor(this)" type="color" />
+              </div>
+            </div>
+          </div>
+          <div class="controls hide">
+            <div class="row1">
+              <label>Roation</label>
+            </div>
+            <div class="row2">
+              <input oninput="updatecornerdotsRotation(this)" type="number" />
+            </div>
+          </div>
+        </div>
+        <div data-content id="background">
+          <div class="controls">
+            <div class="row1">
+              <label>Background Color</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input oninput="updateBackgroundColor(this)" type="color" />
+              </div>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>All color</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input oninput="updateAllColor(this)" type="color" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-content id="image">
+          <div class="controls">
+            <div class="row1">
+              <label>Upload</label>
+            </div>
+            <div class="row2">
+              <input onchange="updateImage(this)" type="file" accept="image/jpeg,image/png" />
+            </div>
+          </div>
+
+          <div class="controls">
+            <div class="row1">
+              <label>Or</label>
+            </div>
+            <div class="row2">
+              <input oninput="updateurlImage(this)" type="url" placeholder="Paste URL" required />
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Bring Front</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input onchange="updateBringFront(this)" type="checkbox" />
+              </div>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Image size</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input onchange="updateimageSize(this)" value="0.4" type="number" />
+              </div>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Margin</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input onchange="updateImageMargin(this)" min="0" max="10" value="0" type="range" />
+              </div>
+            </div>
+          </div>
+          <div class="crontrols">
+            <div class="row1">
+              <label for="">Clear Image</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <button onclick="ClearImage()">Clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-content id="style"></div>
+        <div data-content id="download">
+          <div class="controls">
+            <div class="row1">
+              <label>Name</label>
+            </div>
+            <div class="row2">
+              <div class="doubleColor">
+                <input value="Ranjan" onkeyup="updateName(this)" type="text" />
+              </div>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Type</label>
+            </div>
+            <div class="row2">
+              <select onchange="extension(this)">
+                <option value="png">PNG</option>
+                <option value="jpg">JPEG</option>
+              </select>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row1">
+              <label>Quality</label>
+            </div>
+            <div class="row2">
+              <select onchange="updateQulity(this)">
+                <option value="1000">1</option>
+                <option value="2000">2</option>
+                <option value="3000">3</option>
+                <option value="4000">4</option>
+                <option value="5000">5</option>
+                <optgroup label="May not useful">
+                  <option value="6000">6</option>
+                  <option value="7000">7</option>
+                  <option value="8000">8</option>
+                  <option value="9000">9</option>
+                  <option value="9500">10</option>
+                </optgroup>
+
+              </select>
+            </div>
+          </div>
+
+          <div class="controls">
+            <div class="row1">
+              <label>Reset QR</label>
+            </div>
+            <div class="row2">
+              <label>
+                <div class="doubleColor">
+                  <button style="background: red" onclick="resetQR()">
+                    Reset
+                  </button>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="controls">
+            <div class="row1">
+              <label>
+                <button onclick="download()">
+                  <i id="dwn" class="material-icons">download</i> Download
+                </button>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="sec2">
+      <picture id="canvas"></picture>
+    </section>
+  </main>
+
+  <script src="api.js"></script>
+  <script src="functions.js"></script>
+  <script src="typing.js"></script>
+  <script src="design.js"></script>
+
+</body>
+
+</html>
